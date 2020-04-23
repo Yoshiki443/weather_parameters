@@ -166,7 +166,7 @@ def T_Td(t, td):
 """
 露点温度[C]と気圧[hPa]から、混合比[g/g]を計算する
 """
-def mixing_ratio(td, p, formula="Bolton"):
+def Mixing_Ratio(td, p, formula="Bolton"):
     e = T_to_WVP(td, formula)
     return 0.622 * e / (p - e)
 
@@ -202,7 +202,7 @@ def Theta_e(t, td, p, formula="Bolton"):
     R_div_Cp = 0.2857
 
     e = T_to_WVP(td, formula)
-    m = mixing_ratio(td, p, formula)
+    m = Mixing_Ratio(td, p, formula)
 
     t = t + abs_t
     td = td + abs_t
