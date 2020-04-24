@@ -1,5 +1,5 @@
 # Introduction
-=> [Japanese here]().
+=> [Japanese here](https://qiita.com/Yoshiki443/items/6a4682bebdf87bd82cff).
 
 This is a python module for calculating meteorological parameters, named "**wxparams**". For instance, dew point temperature can be calculated given air temperature and relative humidity. At first I made this for my own use, but now I'd be happy to release it to the public.
 
@@ -108,7 +108,7 @@ On the other hand, if numeric is set to True, the numbers "**8, 1, 2, 3, 4, 5, 6
 
 ---
 ### Deg_to_Dir16(val, dir_zero=None, numeric=False)
-Convert 360-degree wind direction into 16 directions of winds, like "**N, NNE, NE, ENE, E, ESE, SE, SSE, S, SSW, SW, WSW, W, WNW, NW, NNW**. Wind direction 0 is converted to the string which is assigned to *dir_zero* option. The default is None.
+Convert 360-degree wind direction into 16 directions of winds, like "**N, NNE, NE, ENE, E, ESE, SE, SSE, S, SSW, SW, WSW, W, WNW, NW, NNW**". Wind direction 0 is converted to the string which is assigned to *dir_zero* option. The default is None.
 
 On the other hand, if numeric is set to True, the numbers "**16, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15**" are output. Due north is 16, not 0. Wind direction 0 is converted to 0.
 
@@ -236,6 +236,7 @@ WMO equation : <!-- $$ {\Large es = e^{\left(19.482 - \frac{4303.4}{T + 243.5}\r
 
 Bolton equation : <!-- $$ {\Large es = 6.112 \times e^{\left(\frac{17.67 T}{T + 243.5}\right)} } $$ -->
 <img src="image/Bolton_equation.png" width="250">
+
 
 **Parameters :**
 
