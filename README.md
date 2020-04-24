@@ -228,9 +228,12 @@ In this function, saturated water vapor pressure[hPa] is also calculated. There 
 Calculate saturated water vapor pressure[hPa] given air temperature[C]. If dew point temperature[C] is input, output water vapor pressure[hPa].
 There are 3 formulas to calculate this as below. Default is "Bolton", but "Tetens" and "WMO" are also available.
 
-Tetens equation : $$ {\Large es = 6.1078 \times 10^{\left(\frac{7.5 T}{T + 237.3}\right)} } $$
-WMO equation : $$ {\Large es = e^{\left(19.482 - \frac{4303.4}{T + 243.5}\right)} } $$
-Bolton equation : $$ {\Large es = 6.112 \times e^{\left(\frac{17.67 T}{T + 243.5}\right)} } $$ 
+Tetens equation : <!-- $$ {\Large es = 6.1078 \times 10^{\left(\frac{7.5 T}{T + 237.3}\right)} } $$ -->
+<img src="image/Tetens_equation.png" width="280">
+WMO equation : <!-- $$ {\Large es = e^{\left(19.482 - \frac{4303.4}{T + 243.5}\right)} } $$ -->
+<img src="image/WMO_equation.png" width="230">
+Bolton equation : <!-- $$ {\Large es = 6.112 \times e^{\left(\frac{17.67 T}{T + 243.5}\right)} } $$ -->
+<img src="image/Bolton_equation.png" width="250">
 
 **Parameters :**
 
@@ -317,7 +320,8 @@ Calculate potential temperature[K] given air temperature[C] and pressure[hPa].
 ### Tlcl(T, Td)
 Calculate air temperature at lifted condensation level[K] given air temperature[K] and dew point temperature[K]. Pay attention that the unit of air temperature and dew point temperature is required to be [K].
 
-$$ {\Large T_{LCL} = \frac{1}{\frac{1}{Td-56}+\frac{ln(T\ /\ Td)}{800}}+56 } $$
+<!-- $$ {\Large T_{LCL} = \frac{1}{\frac{1}{Td-56}+\frac{ln(T\ /\ Td)}{800}}+56 } $$ -->
+<img src="image/Tlcl.png" width="350">
 
 **Parameters :**
 
@@ -339,7 +343,8 @@ The implemented formula is as the same as a formula which JMA adopted. See the l
 
 Be aware that $ R_{d}\ /\ C_{pd} $ is **0.2854** in that PDF, but normally the value should be **0.2857**. So **0.2857** is used in this module.
 
-$$ {\large \theta_{e} = T\left(\frac{1000}{P-e}\right)^\frac{R_{d}}{C_{pd}}\left(\frac{T}{T_{LCL}}\right)^{0.28w}exp\left(\left(\frac{3036.0}{T_{LCL}}-1.78\right)w(1+0.448w)\right) } $$
+<!-- $$ {\large \theta_{e} = T\left(\frac{1000}{P-e}\right)^\frac{R_{d}}{C_{pd}}\left(\frac{T}{T_{LCL}}\right)^{0.28w}exp\left(\left(\frac{3036.0}{T_{LCL}}-1.78\right)w(1+0.448w)\right) } $$ -->
+<img src="image/Theta_E.png" width="710">
 
 **Parameters :**
 
