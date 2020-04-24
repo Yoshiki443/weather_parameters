@@ -16,13 +16,13 @@ MIT license.
 
 # Main functions
 1. Wind-related functions
-    - UV components of wind <=> wind direction and velocity, 8 and 16 directions of wind, cross wind component, and so on
+    - Conversion between UV components of wind and wind direction / velocity, 8 and 16 directions of wind, cross wind component, and so on
 2. Moisture-related functions
-    - Relative humidity <=> dew point temperature, saturated water vapor pressure, mixing ratio, and so on
+    - Conversion between relative humidity and dew point temperature, saturated water vapor pressure, mixing ratio, and so on
 3. Instability-related functions
     - Potential temperature, equivalent potential temperature, SSI, K-Index, and so on
 4. Unit conversion
-    - **m/s** <=> **knot**, **meter** <=> **feet**, and so on
+    - Conversion between **m/s** and **knot**, between **meter** and **feet**, and so on
 
 
 # How to use
@@ -40,7 +40,7 @@ print(td)
 #  [ 4.78251527 19.91913689]]
 ```
 
-Import exparams with a name "wx". The name "wx" is a abbreviation of "weather".Then call a function you want to use. The example above shows the case to calculate dew point temperature given air temperature and relative humidity.
+Import wxparams with a name "wx". The name "wx" is a abbreviation of "weather". Then call a function you want to use. The example above shows the case to calculate dew point temperature given air temperature and relative humidity.
 
 The input data is supposed to be **numpy.ndarray** basically. **Pandas.Series** may be available too. As for a single value, some functions work correctly, but some not. So **numpy.ndarray** is recommended.
 
