@@ -1,7 +1,7 @@
 # Introduction
 => [Japanese here](https://qiita.com/Yoshiki443/items/6a4682bebdf87bd82cff).
 
-This is a python module for calculating meteorological parameters, named "**wxparams**". For instance, dew point temperature can be calculated given air temperature and relative humidity. At first I made this for my own use, but now I'd be happy to release it to the public.
+This is a python module for calculating meteorological parameters, named **```wxparams```**, which stands for **Weather Parameters**. For instance, dew point temperature can be calculated given air temperature and relative humidity. At first I made this for my own use, but now I'd be happy to release it to the public.
 
 
 # Install
