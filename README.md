@@ -195,7 +195,7 @@ In this function, saturated water vapor pressure[hPa] is also calculated. There 
   - Air temperature[C]
 - RH : array_like
   - Relative humidity[%]
-- formula : str, optional (default="Bolton") 
+- formula : str, optional (default="Bolton")
   - Select a formula to calculate saturated water vapor pressure[hPa]. "Bolton" is default, and "Tetens" and "WMO" are also available.
 
 **Returns :**
@@ -215,7 +215,7 @@ In this function, saturated water vapor pressure[hPa] is also calculated. There 
   - Air temperature[C]
 - Td : array_like
   - Dew point temperature[C]
-- formula : str, optional (default="Bolton") 
+- formula : str, optional (default="Bolton")
   - Select a formula to calculate saturated water vapor pressure[hPa]. "Bolton" is default, and "Tetens" and "WMO" are also available.
 
 **Returns :**
@@ -242,7 +242,7 @@ Bolton equation : <!-- $$ {\Large es = 6.112 \times e^{\left(\frac{17.67 T}{T + 
 
 - T : array_like
   - Air temperature[C] (or dew porint temperature[C])
-- formula : str, optional (default="Bolton") 
+- formula : str, optional (default="Bolton")
   - Select a formula to calculate saturated water vapor pressure[hPa]. "Bolton" is default, and "Tetens" and "WMO" are also available.
 
 **Returns :**
@@ -258,7 +258,7 @@ As inverse function of T_to_WVP, calculate air temperature[C] given saturated wa
 
 - es : array_like
   - Saturated water vapor pressure[hPa] (or water vapor pressure[hPa]）
-- formula : str, optional (default="Bolton") 
+- formula : str, optional (default="Bolton")
   - Select a formula to calculate saturated water vapor pressure[hPa]. "Bolton" is default, and "Tetens" and "WMO" are also available.
 
 **Returns :**
@@ -268,7 +268,7 @@ As inverse function of T_to_WVP, calculate air temperature[C] given saturated wa
 
 ---
 ### T_Td(T, Td)
-Calculate dew point depression given air temperature[C] and dew point temperature[C]. 
+Calculate dew point depression given air temperature[C] and dew point temperature[C].
 
 **Parameters :**
 
@@ -294,7 +294,7 @@ In this function, saturated water vapor pressure[hPa] is also calculated. There 
   - Dew point temperature[C]
 - P : array_like
   - Pressure[hPa]
-- formula : str, optional (default="Bolton") 
+- formula : str, optional (default="Bolton")
   - Select a formula to calculate saturated water vapor pressure[hPa]. "Bolton" is default, and "Tetens" and "WMO" are also available.
 
 **Returns :**
@@ -382,7 +382,7 @@ In this function, saturated water vapor pressure[hPa] is also calculated. There 
   - Air temperature at the destination level[hPa]
 - Td : array_like
   - Dew point temperature at the base level[hPa]
-- formula : str, optional (default="Bolton") 
+- formula : str, optional (default="Bolton")
   - Select a formula to calculate saturated water vapor pressure[hPa]. "Bolton" is default, and "Tetens" and "WMO" are also available.
 
 **Returns :**
@@ -468,6 +468,34 @@ Convert the unit of length [feet] to [meter].
 
 - y : array_like
   - length[m]
+
+---
+### degF_to_degC(x)
+Convert the unit of temperature [F:degrees Fahrenheit] to [C:degrees Celsius].
+
+**Parameters :**
+
+- x : array_like
+  - temperature[F]
+
+**Returns :**
+
+- y : array_like
+  - temperature[C]
+
+---
+### degC_to_degF(x)
+Convert the unit of temperature [C:degrees Celsius] to [F:degrees Fahrenheit].
+
+**Parameters :**
+
+- x : array_like
+  - temperature[C]
+
+**Returns :**
+
+- y : array_like
+  - temperature[F]
 
 ---
 # Plan of update

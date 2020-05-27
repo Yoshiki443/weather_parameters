@@ -2,7 +2,7 @@ import setuptools
 
 setuptools.setup(
     name="wxparams",
-    version="1.0",
+    version="1.1",
     author="Yoshiki Kato",
     # author_email="",
     description="Weather Parameters Calculator",

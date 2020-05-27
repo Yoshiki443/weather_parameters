@@ -268,6 +268,17 @@ def M_to_FT(x):
 def FT_to_M(x):
     return x * 0.3048
 
+"""
+Unit of temperature
+(1st) degrees F -> degrees C
+(2nd) degrees C -> degrees F
+"""
+def degF_to_degC(t):
+    return (t - 32.0) / 1.8
+
+def degC_to_degF(t):
+    return 1.8 * t + 32.0
+
 
 """
 Main
