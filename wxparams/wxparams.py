@@ -150,7 +150,7 @@ def WVP_to_T(es, formula="Bolton"):
     elif formula == "WMO":
         return 4303.4 / (19.482 - np.log(es)) - 243.5
     else:
-        return 243.5 / ( 17.67/np.log(es/6.112) - 1 )
+        return 243.5 * np.log(es/6.112) / ( 17.67 - np.log(es/6.112) )
 
 """
 Calculate dew point depression
