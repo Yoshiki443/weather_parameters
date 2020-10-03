@@ -4,7 +4,8 @@
 This is a python module for calculating meteorological parameters, named **```wxparams```**, which stands for **Weather Parameters**. For instance, dew point temperature can be calculated given air temperature and relative humidity. At first I made this for my own use, but now I'd be happy to release it to the public.
 
 - Ver1.0 : 2020/04/24 Originally released
-- Ver1.1 : 2020/05/27 Added functions to convert between temperature[C] and temperature[F] 
+- Ver1.1 : 2020/05/27 Added functions to convert between temperature[C] and temperature[F]
+- Ver1.2 : 2020/10/03 Modified WVP_to_T function
 
 
 # Install
