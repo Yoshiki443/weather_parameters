@@ -14,6 +14,10 @@ Copyright (c) Yoshiki Kato @ Weather Data Science
 import numpy as np
 import copy
 
+abs_t = 273.15
+R_div_Cp = 0.2857
+epsilon = 0.622
+
 
 """
 *----------------------*
@@ -164,7 +168,30 @@ Calculate mixing ratio[g/g] given dew point temperature[C] and pressure[hPa].
 """
 def Mixing_Ratio(td, p, formula="Bolton"):
     e = T_to_WVP(td, formula)
-    return 0.622 * e / (p - e)
+    return epsilon * e / (p - e)
+
+"""
+Calculate specific humidity[g/g] given dew point temperature[C] and pressure[hPa].
+"""
+def Specific_Humidity(td, p, formula="Bolton"):
+    e = T_to_WVP(td, formula)
+    return epsilon * e / (p - (1 - epsilon) * e)
+
+"""
+Calculate absolute humidity[g/m^3] given temperature[C] and dew point temperature[C].
+It's equal to water vapor density.
+"""
+def Absolute_Humidity(t, td, formula="Bolton"):
+    e = T_to_WVP(td, formula)
+    return 2.16679 * e * 100 / (t + abs_t)
+
+"""
+Calculate virtual temperature[C] given temperature[C], dew point temperature[C], 
+and pressure[hPa].
+"""
+def Virtual_Temperature(t, td, p, formula="Bolton"):
+    q = Specific_Humidity(td, p, formula)
+    return (t + abs_t) * (1 - q + q / epsilon) - abs_t
 
 
 """
@@ -175,8 +202,6 @@ def Mixing_Ratio(td, p, formula="Bolton"):
 Calculate potential temperature[K] given air temperature[C] and pressure[hPa].
 """
 def Theta(t, p):
-    abs_t = 273.15
-    R_div_Cp = 0.2857
     return (t + abs_t) * ( (1000./p) ** R_div_Cp )
 
 """
@@ -193,9 +218,6 @@ given air temperature[C], dew point temperature[C], and pressure[hPa].
 Reference : https://www.data.jma.go.jp/add/suishin/jyouhou/pdf/371.pdf
 """
 def Theta_e(t, td, p, formula="Bolton"):
-    abs_t = 273.15
-    R_div_Cp = 0.2857
-
     e = T_to_WVP(td, formula)
     m = Mixing_Ratio(td, p, formula)
 
