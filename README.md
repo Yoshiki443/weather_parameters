@@ -6,6 +6,7 @@ This is a python module for calculating meteorological parameters, named **```wx
 - Ver1.0 : 2020/04/24 Originally released
 - Ver1.1 : 2020/05/27 Added functions to convert between temperature[C] and temperature[F]
 - Ver1.2 : 2020/10/03 Modified WVP_to_T function
+- Ver1.3 : 2020/11/20 Added functions to calculate specific humidity, absolute humidity, and virtual temperature
 
 
 # Install
@@ -307,7 +308,70 @@ In this function, saturated water vapor pressure[hPa] is also calculated. There 
   - Mixing ratio[g/g]
 
 ---
-## Instability-related functions
+### Specific_Humidity(Td, P, formula="Bolton")
+Calculate specific humidity[g/g] given dew point temperature[C] and pressure[hPa].
+
+In this function, saturated water vapor pressure[hPa] is also calculated. There are 3 formulas to calculate it. Default is "Bolton", but "Tetens" and "WMO" are also available. See T_to_WVP for the detail.
+
+**Parameters :**
+
+- Td : array_like
+  - Dew point temperature[C]
+- P : array_like
+  - Pressure[hPa]
+- formula : str, optional (default="Bolton")
+  - Select a formula to calculate saturated water vapor pressure[hPa]. "Bolton" is default, and "Tetens" and "WMO" are also available.
+
+**Returns :**
+
+- q : array_like
+  - Specific humidity[g/g]
+
+---
+### Absolute_Humidity(T, Td, formula="Bolton")
+Calculate absolute humidity[g/m^3] given air temperature[C] and dew point temperature[C]. Absolute humidity is equal to water vapor density.
+
+In this function, saturated water vapor pressure[hPa] is also calculated. There are 3 formulas to calculate it. Default is "Bolton", but "Tetens" and "WMO" are also available. See T_to_WVP for the detail.
+
+**Parameters :**
+
+- T : array_like
+  - Air temperature[C]
+- Td : array_like
+  - Dew point temperature[C]
+- formula : str, optional (default="Bolton")
+  - Select a formula to calculate saturated water vapor pressure[hPa]. "Bolton" is default, and "Tetens" and "WMO" are also available.
+
+**Returns :**
+
+- rho_w : array_like
+  - Absolute humidity[g/m^3]
+
+---
+### Virtual_Temperature(T, Td, P, formula="Bolton")
+Calculate virtual temperature[C] given air temperature[C], dew point temperature[C], and pressure[hPa].
+
+In this function, saturated water vapor pressure[hPa] is also calculated. There are 3 formulas to calculate it. Default is "Bolton", but "Tetens" and "WMO" are also available. See T_to_WVP for the detail.
+
+**Parameters :**
+
+- T : array_like
+  - Air temperature[C]
+- Td : array_like
+  - Dew point temperature[C]
+- P : array_like
+  - Pressure[hPa]
+- formula : str, optional (default="Bolton")
+  - Select a formula to calculate saturated water vapor pressure[hPa]. "Bolton" is default, and "Tetens" and "WMO" are also available.
+
+**Returns :**
+
+- Tv : array_like
+  - Vertual temperature[C]
+
+
+---
+## Functions related to atomoshperic instability and adiabatic process
 ### Theta(T, P)
 Calculate potential temperature[K] given air temperature[C] and pressure[hPa].
 
