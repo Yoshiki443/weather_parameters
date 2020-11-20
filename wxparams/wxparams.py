@@ -183,10 +183,10 @@ It's equal to water vapor density.
 """
 def Absolute_Humidity(t, td, formula="Bolton"):
     e = T_to_WVP(td, formula)
-    return 2.16679 * e * 100 / (t + abs_t)
+    return 2.16674 * e * 100 / (t + abs_t)
 
 """
-Calculate virtual temperature[C] given temperature[C], dew point temperature[C], 
+Calculate virtual temperature[C] given temperature[C], dew point temperature[C],
 and pressure[hPa].
 """
 def Virtual_Temperature(t, td, p, formula="Bolton"):
