@@ -24,7 +24,7 @@ MIT license.
     - Conversion between UV components of wind and wind direction / velocity, 8 and 16 directions of wind, cross wind component, and so on
 2. Moisture-related functions
     - Conversion between relative humidity and dew point temperature, saturated water vapor pressure, mixing ratio, and so on
-3. Instability-related functions
+3. Functions related to atomoshperic instability and adiabatic process
     - Potential temperature, equivalent potential temperature, SSI, K-Index, and so on
 4. Unit conversion
     - Conversion between **m/s** and **knot**, between **meter** and **feet**, and so on
