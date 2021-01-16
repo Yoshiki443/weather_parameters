@@ -7,7 +7,7 @@ This is a python module for calculating meteorological parameters, named **```wx
 - Ver1.1 : 2020/05/27 Added functions to convert between temperature[C] and temperature[F]
 - Ver1.2 : 2020/10/03 Modified WVP_to_T function
 - Ver1.3 : 2020/11/20 Added functions to calculate specific humidity, absolute humidity, and virtual temperature
-
+- Ver1.4 : 2021/01/16 Modified SSI, and added functions to calculate pressure reduced to mean sea level, and surface height
 
 # Install
 You can install **wxparams** using pip as below, or just download from the [GitHub repository](https://github.com/Yoshiki443/weather_parameters).
@@ -432,9 +432,16 @@ Be aware that <!-- $ R_{d}\ /\ C_{pd} $ -->*Rd / Cpd* is **0.2854** in that PDF,
   - Equivalent potential temperature[K]
 
 ---
-### SSI(P0, P1, T0, T1, Td0, formula="Bolton")
+### SSI(P0, P1, T0, T1, Td0, formula="Bolton", **kwargs)
 Calculate showalter stability index (SSI).
 Input parameters are air temperature[C], dew point temperature[C], and pressure[hPa] at the base level of an air parcel to be lifted, and air temperature[C] and pressure[hPa] at the destination level of the lifting air parcel. Usually the base level is 850hPa and the destination level is 500hPa, but any pressure levels are available on this function.
+
+SSI is calculated as T1 minus Tl which is temperature of air parcel lifted from P0 to P1 level. Tl is calculated as below.
+
+1. Calculate thickness between P0 and P1 level using hypsometric equation. If geopotential heights are input as keyword arguments named "h0" and "h1", geopotential heights are used to calculate thickness.
+2. Calculate temperature of air parcel lifted dry-adiabatically from P0 to P1 level (Tl_dry), and temperature at LCL (Tlcl).
+3. If Tl_dry > Tlcl, the lifted parcel is not saturated, and Tl_dry is used as Tl.
+4. If not, the lifted parcel is saturated, and Tl is calculated exploratory.
 
 In this function, saturated water vapor pressure[hPa] is also calculated. There are 3 formulas to calculate it. Default is "Bolton", but "Tetens" and "WMO" are also available. See T_to_WVP for the detail.
 
@@ -452,6 +459,11 @@ In this function, saturated water vapor pressure[hPa] is also calculated. There 
   - Dew point temperature at the base level[hPa]
 - formula : str, optional (default="Bolton")
   - Select a formula to calculate saturated water vapor pressure[hPa]. "Bolton" is default, and "Tetens" and "WMO" are also available.
+
+- h0 : array_like
+  - Geopotential height at the base level[m]. This is an optional argument and should be input as keyword argument.
+- h1 : array_like
+  - Geopotential height at the destination level[m]. This is an optional argument and should be input as keyword argument.
 
 **Returns :**
 
@@ -479,6 +491,45 @@ Calculate K-Index given air temperature[C] and dew point temperature[C] at 850hP
 
 - Kindex : array_like
   - K-Index
+
+---
+### PRES_to_PRMSL(P1, T1, Z1)
+Calculate pressure reduced to mean sea level[hPa] given surface pressure[hPa], surface temperature[C], and surface height[m].
+
+<!-- $$ {\large P_0 = P_1 \left( 1 - \frac{0.0065 Z_1}{T_1 + 273.15 + 0.0065 Z_1} \right)^{-5.257} } $$ -->
+<img src="image/Hypsometric_equation.png" width="710">
+
+**Parameters :**
+
+- P1 : array_like
+  - Surface pressure[hPa]
+- T1 : array_like
+  - Surface temperature[C]
+- Z1 : array_like
+  - Surface height[m]
+
+**Returns :**
+
+- P0 : array_like
+  - Pressure reduced to mean sea level[hPa]
+
+---
+### Surface_Height(P0, P1, T1)
+Calculate surface height[m] given mean sea level pressure[hPa], surface pressure[hPa], and surface temperature[C].
+
+**Parameters :**
+
+- P0 : array_like
+  - ressure reduced to mean sea level[hPa]
+- P1 : array_like
+  - Surface pressure[hPa]
+- T1 : array_like
+  - Surface temperature[C]
+
+**Returns :**
+
+- Z1 : array_like
+  - Surface height[m]
 
 ---
 ## Unit conversion

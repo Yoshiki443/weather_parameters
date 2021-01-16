@@ -14,9 +14,15 @@ Copyright (c) Yoshiki Kato @ Weather Data Science
 import numpy as np
 import copy
 
+#--Global parameters
 abs_t = 273.15
 R_div_Cp = 0.2857
 epsilon = 0.622
+g0 = 9.80665
+Rd = 287.04
+gamma_d = 0.00976
+gamma_s = 0.0065
+kappa = 5.257
 
 
 """
@@ -196,7 +202,7 @@ def Virtual_Temperature(t, td, p, formula="Bolton"):
 
 """
 *-----------------------------*
- Instability-related functions
+ Functions related to atmospheric thermodynamics and instability
 *-----------------------------*
 
 Calculate potential temperature[K] given air temperature[C] and pressure[hPa].
@@ -234,14 +240,30 @@ and pressure[hPa] at the base level of an air parcel to be lifted,
 and air temperature[C] and pressure[hPa] at the destination level
 of the lifting air parcel.
 """
-def SSI(p0, p1, t0, t1, td0, formula="Bolton"):
-    ept = Theta_e(t0, td0, p0, formula)
-
+def SSI(p0, p1, t0, t1, td0, formula="Bolton", **kwargs):
     tl = np.full_like(t0, -20)
     diff = np.full_like(t0, 100)
     th = 0.001
     step = 120
 
+    # Calculate thickness
+    if "h0" in kwargs.keys() and "h1" in kwargs.keys():
+        thickness = kwargs["h1"] - kwargs["h0"]
+    else:
+        t_ave = (t0 + t1) / 2 + abs_t
+        thickness = Rd * t_ave * np.log(p0/p1) / g0
+
+    # Calculate temperature of lifted parcel dry-adiabatically from p0 to p1 level
+    #  and temperature at LCL
+    tl_dry = t0 - thickness * gamma_d
+    t_lcl = Tlcl(t0 + abs_t, td0 + abs_t) - abs_t
+
+    # If t_lift > t_lcl, lifted parcel is not saturated
+    tl[ tl_dry > t_lcl ] = tl_dry[ tl_dry > t_lcl ]
+    diff[ tl_dry > t_lcl ] = th / 10
+
+    # If saturated, then calculate temperature of lifted parcel as below
+    ept = Theta_e(t0, td0, p0, formula)
     for i in range(20):
         step /= 2
         diff[ np.abs(diff)>=th ] = ept[ np.abs(diff)>=th ] - Theta_e(tl[ np.abs(diff)>=th ],tl[ np.abs(diff)>=th ],p1[ np.abs(diff)>=th ],formula)
@@ -261,7 +283,21 @@ air temperature[C] and dew point temperature[C] at 700hPa,
 and air temperature[C] at 500hPa.
 """
 def K_Index(T850, Td850, T700, Td700, T500):
-	return ( T850 - T500 ) + Td850 - ( T700 - Td700 )
+    return ( T850 - T500 ) + Td850 - ( T700 - Td700 )
+
+"""
+Calculate pressure reduced to mean sea level[hPa]
+given surface pressure[hPa], surface temperature[C], and surface height[m].
+"""
+def PRES_to_PRMSL(P, T, z):
+    return P * (1 - (gamma_s * z) / (T + abs_t + gamma_s * z)) ** (-kappa)
+
+"""
+Calculate surface height[m]
+given mean sea level pressure[hPa], surface pressure[hPa], and surface temperature[C].
+"""
+def Surface_Height(P0, P1, T1):
+    return ( (P0 / P1) ** (1 / kappa) - 1 ) * (T1 + 273.15) / gamma_s
 
 
 """
