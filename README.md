@@ -415,7 +415,7 @@ Calculate equivalent potential temperature[K] given air temperature[C], dew poin
 The implemented formula is as the same as a formula which JMA adopted. See the last page of [this JMA's PDF](https://www.data.jma.go.jp/add/suishin/jyouhou/pdf/371.pdf) for the detail (Japanese only).
 
 ~~Be aware that <!-- $ R_{d}\ /\ C_{pd} $ -->*Rd / Cpd* is 0.2854 in that PDF, but normally the value should be 0.2857. So 0.2857 is used in this module.~~<br>
-As original equation by [Bolton (1980)](https://doi.org/10.1175/1520-0493(1980)108%3C1046:TCOEPT%3E2.0.CO;2) uses *Rd / Cpd = 0.2854*, I have modified that parameter value. By this modification, calculated values may be changed on the order of 0.01[K].
+As original equation by [Bolton (1980)](https://doi.org/10.1175/1520-0493(1980)108%3C1046:TCOEPT%3E2.0.CO;2) uses *Rd / Cpd = 0.2854*, I have modified that parameter value. By this modification, calculated values may be changed on the order of 0.01 ~ 0.1[K].
 
 <!-- $$ {\large \theta_{e} = T\left(\frac{1000}{P-e}\right)^\frac{R_{d}}{C_{pd}}\left(\frac{T}{T_{LCL}}\right)^{0.28w}exp\left(\left(\frac{3036.0}{T_{LCL}}-1.78\right)w(1+0.448w)\right) } $$ -->
 <img src="image/Theta_E.png" width="710">
