@@ -17,6 +17,7 @@ import copy
 #--Global parameters
 abs_t = 273.15
 R_div_Cp = 0.2857
+R_div_Cp_Bolton = 0.2854
 epsilon = 0.622
 g0 = 9.80665
 Rd = 287.04
@@ -231,7 +232,7 @@ def Theta_e(t, td, p, formula="Bolton"):
     td = td + abs_t
     t_lcl = Tlcl(t, td)
 
-    return t * (1000./(p-e))**R_div_Cp * (t/t_lcl)**(0.28*m) * np.exp( (3036./t_lcl - 1.78) * m * (1 + 0.448 * m ) )
+    return t * (1000./(p-e))**R_div_Cp_Bolton * (t/t_lcl)**(0.28*m) * np.exp( (3036./t_lcl - 1.78) * m * (1 + 0.448 * m ) )
 
 """
 Calculate showalter stability index (SSI).
